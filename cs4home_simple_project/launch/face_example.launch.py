@@ -34,8 +34,8 @@ def generate_launch_description():
     # Specify the actions
     cm1_cmd = Node(
         package='cs4home_simple_project',
-        executable='face_module',
-        name='face_module',
+        executable='yolo_module',
+        name='yolo_module',
         namespace=namespace,
         output='screen',
         parameters=[

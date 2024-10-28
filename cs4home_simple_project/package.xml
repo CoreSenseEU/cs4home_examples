@@ -15,6 +15,8 @@
   <depend>hri_msgs</depend>
   <depend>knowledge_graph_msgs</depend>
   <depend>backward_ros</depend>
+  <depend>yolov8_msgs</depend>
+  <depend>sensor_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

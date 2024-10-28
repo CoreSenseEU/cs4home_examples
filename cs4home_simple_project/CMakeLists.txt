@@ -17,6 +17,9 @@ find_package(rclcpp_lifecycle REQUIRED)
 find_package(hri_msgs REQUIRED)
 find_package(knowledge_graph_msgs REQUIRED)
 find_package(backward_ros REQUIRED)
+find_package(yolov8_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(ament_index_cpp REQUIRED)
 
 set (dependencies 
   cs4home_core
@@ -25,28 +28,52 @@ set (dependencies
   hri_msgs
   knowledge_graph_msgs
   backward_ros
+  yolov8_msgs
+  sensor_msgs
+  ament_index_cpp
 )
 
 include_directories(include)
 
-add_library(face_afferent SHARED src/cs4home_simple_project/FaceAfferent.cpp)
-ament_target_dependencies(face_afferent ${dependencies})
+# FACE HRI
+# add_library(face_afferent SHARED src/cs4home_simple_project/FaceAfferent.cpp)
+# ament_target_dependencies(face_afferent ${dependencies})
 
-add_library(face_efferent SHARED src/cs4home_simple_project/FaceEfferent.cpp)
-ament_target_dependencies(face_efferent ${dependencies})
+# add_library(face_efferent SHARED src/cs4home_simple_project/FaceEfferent.cpp)
+# ament_target_dependencies(face_efferent ${dependencies})
 
-add_library(face_core SHARED src/cs4home_simple_project/FaceCore.cpp)
-ament_target_dependencies(face_core ${dependencies})
+# add_library(face_core SHARED src/cs4home_simple_project/FaceCore.cpp)
+# ament_target_dependencies(face_core ${dependencies})
 
-add_executable(face_module src/FaceModule.cpp)
-ament_target_dependencies(face_module ${dependencies})
-target_link_libraries(face_module 
-  face_afferent
-  face_efferent
-  face_core
+# add_executable(face_module src/FaceModule.cpp)
+# ament_target_dependencies(face_module ${dependencies})
+
+# YOLO DETECTIONS
+add_library(yolo_afferent SHARED src/cs4home_simple_project/YoloAfferent.cpp)
+ament_target_dependencies(yolo_afferent ${dependencies})
+
+add_library(yolo_efferent SHARED src/cs4home_simple_project/YoloEfferent.cpp)
+ament_target_dependencies(yolo_efferent ${dependencies})
+
+add_library(yolo_core SHARED src/cs4home_simple_project/YoloCore.cpp)
+ament_target_dependencies(yolo_core ${dependencies})
+
+add_executable(yolo_module src/YoloModule.cpp)
+ament_target_dependencies(yolo_module ${dependencies})
+
+# target_link_libraries(face_module 
+#   face_afferent
+#   face_efferent
+#   face_core
+# )
+
+target_link_libraries(yolo_module 
+  yolo_afferent
+  yolo_efferent
+  yolo_core
 )
 
-install(TARGETS face_afferent face_efferent face_core face_module
+install(TARGETS yolo_afferent yolo_efferent yolo_core yolo_module
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
