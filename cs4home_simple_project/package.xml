@@ -10,6 +10,11 @@
 
   <depend>cs4home_core</depend>
   <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>hri_msgs</depend>
+  <depend>knowledge_graph_msgs</depend>
+  <depend>backward_ros</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

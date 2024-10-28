@@ -1,0 +1,21 @@
+repositories:
+  thirdparty/cs4home_architecture:
+    type: git
+    url: https://github.com/CoreSenseEU/cs4home_architecture.git
+    version: rolling
+  thirdparty/hri_face_detect:
+    type: git
+    url: https://github.com/ros4hri/hri_face_detect.git
+    version: humble-devel
+  thirdparty/hri_msgs:
+    type: git
+    url: https://github.com/ros4hri/hri_msgs.git
+    version: 9386c241731b2424faa0591c84817516d1ae79bb
+  thirdparty/knowledge_graph:
+    type: git
+    url: https://github.com/mgonzs13/knowledge_graph.git
+    version: master
+  thirdparty/launch_pal:
+    type: git
+    url: https://github.com/pal-robotics/launch_pal.git
+    version: master
