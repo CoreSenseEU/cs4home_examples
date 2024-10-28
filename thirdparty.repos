@@ -19,3 +19,8 @@ repositories:
     type: git
     url: https://github.com/pal-robotics/launch_pal.git
     version: master
+  thirdparty/yolov8_ros:
+    type: git
+    url: https://github.com/mgonzs13/yolov8_ros.git
+    version: main
+

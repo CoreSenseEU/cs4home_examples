@@ -41,7 +41,8 @@ def generate_launch_description():
         parameters=[
             os.path.join(pkg_dir, 'config', 'params_simple.yaml')
         ],
-        arguments=['--ros-args', '--log-level', 'debug'])
+        # arguments=['--ros-args', '--log-level', 'debug']
+    )
 
     # Create the launch description and populate
     ld = LaunchDescription()

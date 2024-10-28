@@ -9,3 +9,17 @@ face_module:
       topics: ["/graph_update"]
     meta: default_meta
     coupling: default_coupling
+
+yolo_module:
+  ros__parameters:
+    core: yolo_core
+    afferent: yolo_afferent
+    yolo_afferent:
+      topics: ["/astra/color/image_raw"]
+      type: sensor_msgs/msg/Image
+    efferent: yolo_efferent
+    yolo_efferent:
+      topics: ["/coresense_detections"]
+      type: yolov8_msgs/msg/DetectionArray
+    meta: default_meta
+    coupling: default_coupling
