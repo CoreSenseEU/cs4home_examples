@@ -32,9 +32,10 @@ int main(int argc, char ** argv)
 
   auto node = cs4home_core::CognitiveModule::make_shared(options);
 
-  // node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
-  // node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
-  // rclcpp::spin(node->get_node_base_interface());
+  node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
+  node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
+
+  rclcpp::spin(node->get_node_base_interface());
 
   rclcpp::shutdown();
 

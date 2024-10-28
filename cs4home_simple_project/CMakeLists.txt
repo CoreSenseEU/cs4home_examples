@@ -5,9 +5,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-add_compile_options(-fsanitize=address)
-add_link_options(-fsanitize=address)
-
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(cs4home_core REQUIRED)
@@ -36,17 +33,17 @@ set (dependencies
 include_directories(include)
 
 # FACE HRI
-# add_library(face_afferent SHARED src/cs4home_simple_project/FaceAfferent.cpp)
-# ament_target_dependencies(face_afferent ${dependencies})
+add_library(face_afferent SHARED src/cs4home_simple_project/FaceAfferent.cpp)
+ament_target_dependencies(face_afferent ${dependencies})
 
-# add_library(face_efferent SHARED src/cs4home_simple_project/FaceEfferent.cpp)
-# ament_target_dependencies(face_efferent ${dependencies})
+add_library(face_efferent SHARED src/cs4home_simple_project/FaceEfferent.cpp)
+ament_target_dependencies(face_efferent ${dependencies})
 
-# add_library(face_core SHARED src/cs4home_simple_project/FaceCore.cpp)
-# ament_target_dependencies(face_core ${dependencies})
+add_library(face_core SHARED src/cs4home_simple_project/FaceCore.cpp)
+ament_target_dependencies(face_core ${dependencies})
 
-# add_executable(face_module src/FaceModule.cpp)
-# ament_target_dependencies(face_module ${dependencies})
+add_executable(face_module src/FaceModule.cpp)
+ament_target_dependencies(face_module ${dependencies})
 
 # YOLO DETECTIONS
 add_library(yolo_afferent SHARED src/cs4home_simple_project/YoloAfferent.cpp)
@@ -61,11 +58,11 @@ ament_target_dependencies(yolo_core ${dependencies})
 add_executable(yolo_module src/YoloModule.cpp)
 ament_target_dependencies(yolo_module ${dependencies})
 
-# target_link_libraries(face_module 
-#   face_afferent
-#   face_efferent
-#   face_core
-# )
+target_link_libraries(face_module 
+  face_afferent
+  face_efferent
+  face_core
+)
 
 target_link_libraries(yolo_module 
   yolo_afferent
@@ -73,7 +70,7 @@ target_link_libraries(yolo_module
   yolo_core
 )
 
-install(TARGETS yolo_afferent yolo_efferent yolo_core yolo_module
+install(TARGETS face_afferent face_efferent face_core face_module yolo_afferent yolo_efferent yolo_core yolo_module
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

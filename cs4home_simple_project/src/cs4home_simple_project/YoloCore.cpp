@@ -13,14 +13,20 @@
 // limitations under the License.
 
 
-#include "cs4home_core/Core.hpp"
-#include "cs4home_core/macros.hpp"
+#include <memory>
+#include <vector>
+#include <string>
 
 #include "sensor_msgs/msg/image.hpp"
 #include "yolov8_msgs/msg/detection_array.hpp"
 
+#include "cs4home_core/Core.hpp"
+#include "cs4home_core/macros.hpp"
+
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
+
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;
@@ -36,44 +42,55 @@ public:
     RCLCPP_DEBUG(parent_->get_logger(), "Core created: [YoloCore]");
   }
 
-  void process_in_image(sensor_msgs::msg::Image::UniquePtr msg)
+  void process_in_image(std::unique_ptr<rclcpp::SerializedMessage> msg)
   {
-    int counter = std::atoi(msg->header.frame_id.c_str());
-    counter = counter * 2;
-    msg->header.frame_id = std::to_string(counter);
+    auto image_msg = afferent_->get_msg<sensor_msgs::msg::Image>(std::move(msg));
 
-    efferent_->publish(std::move(msg));
+    int counter = std::atoi(image_msg->header.frame_id.c_str());
+    counter = counter * 2;
+    image_msg->header.frame_id = std::to_string(counter);
+
+    pub_->publish(std::move(image_msg));
   }
 
-  void timer_callback()
+  void process_detections(std::unique_ptr<rclcpp::SerializedMessage> msg)
   {
-    auto msg = afferent_->get_msg<sensor_msgs::msg::Image>();
-    if (msg != nullptr) {
-      process_in_image(std::move(msg));
-    }
+    auto detection_msg = afferent_->get_msg<yolov8_msgs::msg::DetectionArray>(std::move(msg));
+
+    int counter = std::atoi(detection_msg->header.frame_id.c_str());
+    counter = counter * 2;
+    detection_msg->header.frame_id = std::to_string(counter);
+
+    efferent_->publish(std::move(detection_msg));
   }
 
   bool configure()
   {
     RCLCPP_DEBUG(parent_->get_logger(), "Core configured");
+
+    pub_ = parent_->create_publisher<sensor_msgs::msg::Image>("output_image", 10);
+    sub_ = parent_->create_subscription<yolov8_msgs::msg::DetectionArray>(
+      "/yolo/detections", 10, std::bind(&YoloCore::process_detections, this, _1));
+
     return true;
   }
 
   bool activate()
   {
-    timer_ = parent_->create_wall_timer(
-      50ms, std::bind(&YoloCore::timer_callback, this));
+    afferent_->set_mode(
+      cs4home_core::Afferent::CALLBACK, std::bind(&YoloCore::process_in_image, this, _1));
+
     return true;
   }
 
   bool deactivate()
   {
-    timer_ = nullptr;
     return true;
   }
 
 private:
-  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_;
+  rclcpp::Subscription<yolov8_msgs::msg::DetectionArray>::SharedPtr sub_;
 };
 
 CS_REGISTER_COMPONENT(YoloCore)

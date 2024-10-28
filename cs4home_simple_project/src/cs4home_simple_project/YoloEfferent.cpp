@@ -31,12 +31,12 @@ public:
   {
     RCLCPP_DEBUG(parent_->get_logger(), "Afferent created: [YoloEfferent]");
 
-    parent_->declare_parameter("simple_image_output.topics", output_topic_names_);
+    parent_->declare_parameter("yolo_efferent.topics", output_topic_names_);
   }
 
   bool configure()
   {
-    parent_->get_parameter("simple_image_output.topics", output_topic_names_);
+    parent_->get_parameter("yolo_efferent.topics", output_topic_names_);
 
     for (size_t i = 0; i < output_topic_names_.size(); i++) {
       if (create_publisher(output_topic_names_[i], "yolov8_msgs/msg/DetectionArray")) {
