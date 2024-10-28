@@ -21,6 +21,7 @@
 #include <string>
 
 #include "knowledge_graph_msgs/msg/graph_update.hpp"
+#include "knowledge_graph/knowledge_graph.hpp"
 #include "hri_msgs/msg/ids_list.hpp"
 
 #include "cs4home_core/Core.hpp"
@@ -48,7 +49,8 @@ public:
 
 private:
   rclcpp::TimerBase::SharedPtr timer_;
-
+  std::shared_ptr<knowledge_graph::KnowledgeGraph> graph_;
+  bool is_processed_ = false;
 };
 
 }  // namespace cs4home_simple_project

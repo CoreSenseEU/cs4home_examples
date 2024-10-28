@@ -3,7 +3,7 @@ face_module:
     core: face_core
     afferent: face_afferent
     face_afferent:
-      topics: ["/image_raw"]
+      topics: ["/humans/faces/tracked"]
     efferent: face_efferent
     face_efferent:
       topics: ["/graph_update"]

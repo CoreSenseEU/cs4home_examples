@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
   //   {"--ros-args", "-r", "__node:=cognitive_module_1"});
   rclcpp::NodeOptions options;
 
-  auto node = cs4home_core::CognitiveModule::make_shared(options);
+  auto node = std::make_shared<cs4home_core::CognitiveModule>(options);
 
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);

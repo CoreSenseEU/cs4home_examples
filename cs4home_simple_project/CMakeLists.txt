@@ -5,8 +5,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-add_compile_options(-fsanitize=address)
-add_link_options(-fsanitize=address)
+# add_compile_options(-fsanitize=address)
+# add_link_options(-fsanitize=address)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -15,7 +15,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(hri_msgs REQUIRED)
-find_package(knowledge_graph_msgs REQUIRED)
+find_package(knowledge_graph REQUIRED)
 find_package(backward_ros REQUIRED)
 
 set (dependencies 
@@ -23,7 +23,7 @@ set (dependencies
   rclcpp
   rclcpp_components
   hri_msgs
-  knowledge_graph_msgs
+  knowledge_graph
   backward_ros
 )
 
