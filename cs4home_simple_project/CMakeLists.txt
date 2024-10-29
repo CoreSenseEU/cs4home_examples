@@ -18,7 +18,7 @@ find_package(yolov8_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 
-set (dependencies 
+set(dependencies
   cs4home_core
   rclcpp
   rclcpp_components
@@ -64,7 +64,7 @@ target_link_libraries(face_module
   face_core
 )
 
-target_link_libraries(yolo_module 
+target_link_libraries(yolo_module
   yolo_afferent
   yolo_efferent
   yolo_core

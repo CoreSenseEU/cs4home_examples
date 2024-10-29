@@ -41,9 +41,7 @@ public:
   bool configure() override;
 
 private:
-
   std::vector<std::string> input_topic_names_;
-
 };
 
 }  // namespace cs4home_simple_project

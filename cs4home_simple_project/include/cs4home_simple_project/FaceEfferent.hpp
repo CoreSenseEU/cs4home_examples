@@ -43,9 +43,7 @@ public:
   void publish_graph(knowledge_graph_msgs::msg::GraphUpdate::UniquePtr msg);
 
 private:
-
   std::vector<std::string> output_topic_names_;
-
 };
 
 }  // namespace cs4home_simple_project

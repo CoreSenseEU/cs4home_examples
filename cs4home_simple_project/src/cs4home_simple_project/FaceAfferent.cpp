@@ -34,14 +34,10 @@ bool FaceAfferent::configure()
   parent_->get_parameter("face_afferent.topics", input_topic_names_);
 
   // Create the subscription to the input topics
-  for (const auto & topic_name : input_topic_names_)
-  {
-    if(this->create_subscriber(topic_name, "hri_msgs/msg/IdsList"))
-    {
+  for (const auto & topic_name : input_topic_names_) {
+    if(this->create_subscriber(topic_name, "hri_msgs/msg/IdsList")) {
       RCLCPP_INFO(parent_->get_logger(), "Subscribed to topic: %s", topic_name.c_str());
-    }
-    else
-    {
+    } else {
       RCLCPP_ERROR(parent_->get_logger(), "Error subscribing to topic: %s", topic_name.c_str());
       return false;
     }
