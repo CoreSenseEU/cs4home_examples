@@ -28,13 +28,13 @@ int main(int argc, char ** argv)
 
   rclcpp::NodeOptions options;
   options.arguments(
-    {"--ros-args", "-r", "__node:=yolo_module", "--params-file", config_file});
+    {"--ros-args", "--params-file", config_file});
 
-  auto node = cs4home_core::CognitiveModule::make_shared(options);
+  auto node = cs4home_core::CognitiveModule::make_shared("yolo_module", options);
 
-  // node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
-  // node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
-  // rclcpp::spin(node->get_node_base_interface());
+  node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
+  node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
+  rclcpp::spin(node->get_node_base_interface());
 
   rclcpp::shutdown();
 
