@@ -5,8 +5,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-add_compile_options(-fsanitize=address)
-add_link_options(-fsanitize=address)
+set(CMAKE_BUILD_TYPE Debug)
+
+# add_compile_options(-fsanitize=address)
+# add_link_options(-fsanitize=address)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -21,7 +23,7 @@ find_package(yolov8_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 
-set (dependencies 
+set(dependencies
   cs4home_core
   rclcpp
   rclcpp_components
@@ -61,13 +63,13 @@ ament_target_dependencies(yolo_core ${dependencies})
 add_executable(yolo_module src/YoloModule.cpp)
 ament_target_dependencies(yolo_module ${dependencies})
 
-# target_link_libraries(face_module 
+# target_link_libraries(face_module
 #   face_afferent
 #   face_efferent
 #   face_core
 # )
 
-target_link_libraries(yolo_module 
+target_link_libraries(yolo_module
   yolo_afferent
   yolo_efferent
   yolo_core
