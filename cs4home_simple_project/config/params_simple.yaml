@@ -1,14 +1,14 @@
-# face_module:
-#   ros__parameters:
-#     core: face_core
-#     afferent: face_afferent
-#     face_afferent:
-#       topics: ["/image_raw"]
-#     efferent: face_efferent
-#     face_efferent:
-#       topics: ["/graph_update"]
-#     meta: default_meta
-#     coupling: default_coupling
+face_module:
+  ros__parameters:
+    core: face_core
+    afferent: face_afferent
+    face_afferent:
+      topics: ["/humans/faces/tracked"]
+    efferent: face_efferent
+    face_efferent:
+      topics: ["/graph_update"]
+    meta: default_meta
+    coupling: default_coupling
 
 yolo_module:
   ros__parameters:

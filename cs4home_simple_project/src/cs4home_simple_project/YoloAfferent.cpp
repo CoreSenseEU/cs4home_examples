@@ -31,12 +31,12 @@ public:
   {
     RCLCPP_DEBUG(parent_->get_logger(), "Efferent created: [YoloAfferent]");
 
-    parent_->declare_parameter("simple_image_input.topics", input_topic_names_);
+    parent_->declare_parameter("yolo_afferent.topics", input_topic_names_);
   }
 
   bool configure() override
   {
-    std::string param_name = "simple_image_input.topics";
+    std::string param_name = "yolo_afferent.topics";
     parent_->get_parameter(param_name, input_topic_names_);
 
     RCLCPP_DEBUG(parent_->get_logger(), "[YoloAfferent] Configuring %zu inputs [%s]",

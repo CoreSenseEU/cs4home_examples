@@ -25,13 +25,13 @@ FaceAfferent::FaceAfferent(rclcpp_lifecycle::LifecycleNode::SharedPtr parent)
   RCLCPP_DEBUG(parent_->get_logger(), "Afferent created: [FaceAfferent]");
 
   // Declare the parameter that stores input topic names
-  parent_->declare_parameter("simple_image_input.topics", input_topic_names_);
+  parent_->declare_parameter("face_afferent.topics", input_topic_names_);
 }
 
 bool FaceAfferent::configure()
 {
   // Get the input topic names
-  parent_->get_parameter("simple_image_input.topics", input_topic_names_);
+  parent_->get_parameter("face_afferent.topics", input_topic_names_);
 
   // Create the subscription to the input topics
   for (const auto & topic_name : input_topic_names_) {

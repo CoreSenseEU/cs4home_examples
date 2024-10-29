@@ -23,25 +23,25 @@ FaceEfferent::FaceEfferent(rclcpp_lifecycle::LifecycleNode::SharedPtr parent)
   RCLCPP_DEBUG(parent_->get_logger(), "Efferent created: [FaceEfferent]");
 
   // Declare and load parameters for output topic names
-  parent_->declare_parameter("face_efferent.output_topics", output_topic_names_);
+  parent_->declare_parameter("face_efferent.topics", output_topic_names_);
 }
 
 bool FaceEfferent::configure()
 {
-  parent_->get_parameter("face_efferent.output_topics", output_topic_names_);
+  parent_->get_parameter("face_efferent.topics", output_topic_names_);
 
 
   // Set up publishers for each output topic
   for (const auto & topic_name : output_topic_names_) {
-    if (create_publisher(topic_name, "knowledge_graph/msg/GraphUpdate")) {
+    if (create_publisher(topic_name, "knowledge_graph_msgs/msg/GraphUpdate")) {
       RCLCPP_INFO(
         parent_->get_logger(),
-        "[FaceEfferent] Created publisher on [%s, knowledge_graph/msg/GraphUpdate]",
+        "[FaceEfferent] Created publisher on [%s, knowledge_graph_msgs/msg/GraphUpdate]",
         topic_name.c_str());
     } else {
       RCLCPP_WARN(
         parent_->get_logger(),
-        "[FaceEfferent] Couldn't create publisher on [%s, knowledge_graph/msg/GraphUpdate]",
+        "[FaceEfferent] Couldn't create publisher on [%s, knowledge_graph_msgs/msg/GraphUpdate]",
         topic_name.c_str());
     }
   }

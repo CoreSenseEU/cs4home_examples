@@ -34,6 +34,7 @@ int main(int argc, char ** argv)
 
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
+
   rclcpp::spin(node->get_node_base_interface());
 
   rclcpp::shutdown();
